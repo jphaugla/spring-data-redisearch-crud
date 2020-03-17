@@ -40,30 +40,6 @@ The java code demonstrates common API actions with the data persisted in REDIS. 
 
 ## To execute the code
 (Alternatively, this can be run through intelli4j)
-## first must build in dependency from https://github.com/rnbWarden/jredisearch-spring-boot-starter
-1. Bring down jedisearch spring boot start in its own directory
-```bash
-git clone https://github.com/rnbWarden/jredisearch-spring-boot-starter 
-```
-2. Use gradle to compile and install to your local reposoitory
-```bash
-gradle build
-gradel install
-```
-3. Find the installed jredisearch-spring-boot-starter path.  
-```bash
-find ~/.w2 -name jredisearch*.jar |grep rnbwarden
-```
-4. Edit pom.xml file in spring-data-redisearch-crud dependency to match this file name.  This is current dependency
-```json
-<dependency>
-                        <groupId>com.rnbwarden.redisearch</groupId>
-                        <artifactId>jredisearch-spring-boot-starter</artifactId>
-                        <scope>system</scope>
-                        <systemPath>/Users/jasonhaugland/.m2/repository/com/rnbwarden/jredisearch-spring-boot-starter/0.1.0-dev.135+fbb2324/jredisearch-spring-boot-starter-0.1.0-dev.135+fbb2324.jar</systemPath>
-</dependency>
-```
-
 1. Complile the code
 ```bash
 mvn package
