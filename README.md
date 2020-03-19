@@ -15,11 +15,14 @@ In this tutorial, a java spring boot application is run through a jar file to su
 
 [Docker for windows](https://docs.docker.com/docker-for-windows/#advanced)
 
+* Must use Java 11 to work with com/rnbwarden/redisearch
+
+
 ## Links that help!
 
 [spring data for redis github](https://github.com/spring-projects/spring-data-examples/tree/master/redis/repositories)
 [spring data for redis sample code](https://www.oodlestechnologies.com/blogs/Using-Redis-with-CrudRepository-in-Spring-Boot/)
-
+[macos java, use the home brew sections](https://stackoverflow.com/questions/26252591/mac-os-x-and-multiple-java-versions)
 ## Getting Started
 1. Prepare Docker environment-see the Prerequisites section above...
 2. Pull this github into a directory
