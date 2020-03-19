@@ -14,6 +14,4 @@ import com.rnbwarden.redisearch.client.RediSearchClient;
 
 public class RedisConfig {
     RediSearchClient<ProductEntity> rediSearchClient;
-    }
-
 }
