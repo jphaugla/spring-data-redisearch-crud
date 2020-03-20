@@ -65,59 +65,11 @@ ft.search product "@brand:{ NIKE }"
 ```bash
 curl 'http://localhost:8080/get_Article/?article=FALCON01'
 ```
-  * retrieve by first and lastname	
-```bash
-./scripts/getByname.sh
-```
-  * retrieve one user by user id
-```bash
-./scripts/getByID.sh
-```
   * delete the second value
 ```bash
-curl http://localhost:8080/delete?id=2
+curl -X DELETE http://localhost:8080/delete?id=id123
 ```
-## Redis CRUD indexing strategy
-Very exciting that using the CRUD repository, a field in the java class with the Indexed annotation is treated as an index.
-### User class
+  * add a product using json input
 ```bash
-@RedisHash("user")
-public class User {
-	private @Id String id;
-	private @Indexed String firstName;
-	private String middleName;
-	private @Indexed String lastName;
-	private String roleName;
-}
+./src/postProduct.sh
 ```
-for a user with an id=1, This is stored in a Hash with a key of user:1
-(this is stored in a hash and not in a json format but displaying in json)
-```json
-{"_class":"com.jphaugla.domain.User","id":"1","firstName":"Jason","middleName":"Paul","lastName":"Haugland","roleName":"CEO"}
-```
-Since firstName and lastName are indexed, they are added to a set key value for each index:
-```bash
-user:1:idx
-	user:firstName:Jason
-	user:lastName:Haugland
-```
-Then user:firstName:Jason is a set holding the user idx of each user with a first name of jason.  User 2 is Jason Smith so user 2 is in this set.
-```bash
-user:firstName:Jason
-	1
-	2
-```
-user:lastName:Haugland is a set hodle user idx of each user with a last name of Haugland.   User 5 is Caterhine Haugland so user 5 is in this set.
-```bash
-user:lastName:Haugland
-	1
-	5
-```
-Finally, user is a set of all the IDs
-```bash
-user
-	1
-	2
-	5
-```
-
