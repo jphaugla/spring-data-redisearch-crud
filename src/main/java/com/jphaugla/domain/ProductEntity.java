@@ -1,37 +1,52 @@
 package com.jphaugla.domain;
 
-import com.rnbwarden.redisearch.entity.RediSearchField;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import lombok.Data;
 import com.rnbwarden.redisearch.entity.RediSearchEntity;
+import com.rnbwarden.redisearch.entity.RediSearchField;
+import com.rnbwarden.redisearch.entity.RediSearchFieldType;
 import com.rnbwarden.redisearch.entity.RedisSearchableEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@DependsOn("RediSearchAutoConfiguration")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @RediSearchEntity(name = "product")
-
 public class ProductEntity implements RedisSearchableEntity {
-    @Autowired(required = true)
-   public static final String COLUMN1 = "column1";
-   public static final String COLUMN2 = "column2";
 
-   private String key;
+    public static final String ARTICLE_NUMBER = "articleNumber";
+    public static final String BRAND = "brand";
+    public static final String SKUS = "skus";
 
-   @RediSearchField(name = COLUMN1, sortable = true)
-       String column1;
-   @RediSearchField(name = COLUMN2)
-       String column2;
+    private String id;
 
-   @Override
-       public String getPersistenceKey() {
-          return key;
-   }
+    @RediSearchField(name = ARTICLE_NUMBER, sortable = true)
+    private String articleNumber;
 
+    @RediSearchField(name = BRAND, type = RediSearchFieldType.TAG)
+    private Brand brand;
+
+    private List<SkuEntity> skus;
+
+    @Override
+    public String getPersistenceKey() {
+
+        return id + "|" + brand.toString();
+    }
+
+    @RediSearchField(name = SKUS)
+    public Collection<String> getSkuIds() {
+
+        if (skus == null) {
+            return Collections.emptyList();
+        }
+        return skus.stream().map(SkuEntity::getKey).collect(Collectors.toSet());
+    }
 }

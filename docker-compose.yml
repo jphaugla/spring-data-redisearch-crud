@@ -3,6 +3,8 @@ services:
   redis:
     image: "redislabs/redisearch:latest"
     container_name: redis
+    environment:
+      - ENABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
     ports:
       - "6379:6379"
 

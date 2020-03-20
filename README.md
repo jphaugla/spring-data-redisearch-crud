@@ -54,11 +54,16 @@ java -jar target/redis-0.0.1-SNAPSHOT.jar
 3.  Test the application from a separate terminal window
   * save some "in-code" values
 ```bash
-./scripts/saveUser.sh
+curl http://localhost:8080/save_product
 ```
-  * save using a json file
+  * verify using redis-cli product is in redis
 ```bash
-./scripts/putUser.sh
+redis-cli
+ft.search product "@brand:{ NIKE }"
+```
+  * retrieve by article name
+```bash
+curl 'http://localhost:8080/get_Article/?article=FALCON01'
 ```
   * retrieve by first and lastname	
 ```bash

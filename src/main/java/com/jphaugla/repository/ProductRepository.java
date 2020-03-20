@@ -24,20 +24,19 @@ public class ProductRepository {
 		productEntityRediSearchClient.delete(key);
 	}
 
-	public List<ProductEntity> findByColumn1(String value) {
+	public List<ProductEntity> findByArticleNumber(String value) {
 		Map<String, String> column1Map = new HashMap<String, String>() {
 			{
-				put(ProductEntity.COLUMN1, value);
+				put(ProductEntity.ARTICLE_NUMBER, value);
 			}};
 		SearchResults<ProductEntity> searchResults = productEntityRediSearchClient.findByFields(column1Map);
         searchResults.getTotalResults();
         return productEntityRediSearchClient.deserialize(searchResults);
 	}
-	public List<ProductEntity> findByColumns(String column1Value, String column2Value) {
+	public List<ProductEntity> findByColumns(String brand) {
      	Map<String, String> fieldNameValues = new HashMap<String, String>() {
 			{
-			put(ProductEntity.COLUMN1, column1Value);
-			put(ProductEntity.COLUMN2, column2Value);
+			put(ProductEntity.BRAND, brand);
 			}};
 		SearchResults<ProductEntity> searchResults = productEntityRediSearchClient.findByFields(fieldNameValues);
 		searchResults.getTotalResults();
