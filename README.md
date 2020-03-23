@@ -71,5 +71,6 @@ curl -X DELETE http://localhost:8080/delete?id=id123
 ```
   * add a product using json input
 ```bash
-./src/postProduct.sh
+./scripts/postProduct.sh
 ```
+  * other scripts are available in the scripts directory and have documentation
