@@ -1,14 +1,18 @@
 package com.jphaugla.repository;
 
+import com.jphaugla.domain.Brand;
 import com.jphaugla.domain.ProductEntity;
 import com.rnbwarden.redisearch.client.RediSearchClient;
 import com.rnbwarden.redisearch.client.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
+import static java.util.Collections.emptyList;
 
 @Repository
 public class ProductRepository {
@@ -42,4 +46,14 @@ public class ProductRepository {
 		searchResults.getTotalResults();
 		return productEntityRediSearchClient.deserialize(searchResults);
 	}
+	public boolean saveProductsInRange(int max, String namePrefix, Brand brand) {
+
+		IntStream.range(0, max)/*.parallel()*/.forEach(i -> {
+			ProductEntity product = new ProductEntity("id" + i, namePrefix + i, brand, Collections.emptyList());
+			productEntityRediSearchClient.save(product);
+		});
+		return true;
+	}
+
+
 }

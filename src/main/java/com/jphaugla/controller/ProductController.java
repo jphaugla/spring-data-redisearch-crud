@@ -43,9 +43,15 @@ public class ProductController {
 		return "Done";
 	}
 
+
 	@GetMapping("/get_Article")
 	public List<ProductEntity> getProductEntity(@RequestParam String article) {
 		return productRepository.findByArticleNumber(article);
+	}
+
+	@GetMapping("/put_records")
+	public boolean putRecords(@RequestParam int max, @RequestParam String namePrefix, @RequestParam Brand brand) {
+		return productRepository.saveProductsInRange(max, namePrefix, brand);
 	}
 
 
