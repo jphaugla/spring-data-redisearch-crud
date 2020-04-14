@@ -38,7 +38,7 @@ public class ProductController {
 				List.of(new SkuEntity("b01", Map.of("color", "red", "price", "79.99")),
 						new SkuEntity("b02", Map.of("color", "orange", "price", "79.99"))));
 		productRepository.save(product1);
-		productRepository.save(product1);
+		productRepository.save(product2);
 		logger.warn("leaving save_Product");
 		return "Done";
 	}
